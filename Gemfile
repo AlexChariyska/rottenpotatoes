@@ -8,8 +8,6 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -56,11 +54,9 @@ gem 'haml'
 # !!!!! Make sure you set the version of ruby installed used by your application
 # use $ ruby -v to get the installed ruby version
 ruby '2.4.0'   # just in case - tell Heroku which Ruby version we need
-group :development, :test do
-  # make sure sqlite3 gem ONLY occurs inside development & test groups
-  # !!!!! make sure that you delete the sqlite3 gem from the general gems outside the development and test groups
-  gem 'sqlite3' # use SQLite only in development and testing
-end 
+group :development, :test do # <<<< :development, not devlopment
+  gem 'sqlite3'
+end
 group :production do
   # make sure the following gems are in your production group:
   gem 'pg'              # use PostgreSQL in production (Heroku)
