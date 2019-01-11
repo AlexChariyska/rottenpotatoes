@@ -88,4 +88,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  # in config/environments/production.rb edit the config.assets property:
+  config.assets.initialize_on_precompile = false
 end
