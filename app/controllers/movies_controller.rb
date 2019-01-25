@@ -44,7 +44,7 @@ end
 # replaces the 'create' method in controller:
 def create
   params.require(:movie)
-  permitted = params[:movie].permit(:title,:rating,:release_date)
+permitted = params[:movie].permit(:title, :rating, :description, :release_date, :director)
   @movie = Movie.new(permitted)
   if @movie.save
     flash[:notice] = "#{@movie.title} was successfully created."
@@ -64,7 +64,7 @@ end
 def update
   @movie = Movie.find params[:id]
   params.require(:movie)
-  permitted = params[:movie].permit(:title,:rating,:release_date)
+  permitted = params[:movie].permit(:title, :rating, :description, :release_date, :director)
   if @movie.update_attributes(permitted)
     flash[:notice] = "#{@movie.title} was successfully updated."
     redirect_to movie_path(@movie)
@@ -78,5 +78,15 @@ def destroy
   @movie.destroy
   flash[:notice] = "Movie '#{@movie.title}' deleted."
   redirect_to movies_path
+end
+
+def search_similar_movies
+  @movie = Movie.find(params[:id])
+  if @movie.director.nil? || @movie.director.empty?
+    flash[:warning]= "'#{@movie.title}' has no director info"
+    redirect_to movies_path
+  else
+    @movies = Movie.similar_movies(@movie)
+  end
 end
 end

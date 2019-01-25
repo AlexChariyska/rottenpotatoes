@@ -18,4 +18,8 @@ class Movie < ApplicationRecord
   end
   
   def self.all_ratings ; %w[G PG PG-13 R NC-17] ; end
+    
+  def self.similar_movies(movie)
+   Movie.where director: movie.director
+  end
 end

@@ -14,5 +14,8 @@
 %p#description= @movie.description
 
 = link_to 'Edit info', edit_movie_path(@movie)
+-# after = link_to 'Edit info', edit_movie_path(@movie)
+-# add 'Find Movies With Same Director' link 
+= link_to 'Find Movies With Same Director', search_similar_movies_url(id: @movie.id)
 = link_to 'Back to movie list', movies_path
 = link_to 'Delete', movie_path(@movie), :method => :delete
